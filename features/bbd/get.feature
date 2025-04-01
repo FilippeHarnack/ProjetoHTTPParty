@@ -1,11 +1,11 @@
 # language: pt
 
-Funcionalidade: Pesquisar Funcionarios
-Para averiguar informacoes
-O usuario do sistema
-Deseja poder consultar informacoes dos funcionarios
+Funcionalidade: Consulta de Funcionários
+  Para obter informações sobre os funcionários cadastrados
+  Como um usuário do sistema
+  Eu desejo poder pesquisar funcionários na base de dados
 
-  Cenário: Buscar informacoes de um funcionario
-    Dado que o usuario consulte informacoes de funcionario
+  Cenário: Buscar informações de um funcionário
+    Dado que o usuário deseja consultar a lista de funcionários
     Quando ele realizar a pesquisa
-    Então uma lista de funcionarios deve retornar
+    Então o sistema deve retornar uma lista de funcionários

@@ -17,6 +17,7 @@ Dado('que o usuario cadastre um novo funcionario') do
   @post_url = 'http://dummy.restapiexample.com/api/v1/create'
 end
 
+
 Quando('ele enviar as informacoes do funcionario') do
   @create_employee = HTTParty.post(@post_url, 
     headers: { 'Content-Type' => 'application/json' },
@@ -32,6 +33,7 @@ Quando('ele enviar as informacoes do funcionario') do
   puts @create_employee
 end
 
+
 Então('esse funcionario sera cadastrado') do
   expect(@create_employee.code).to eql(200)
   expect(@create_employee.message).to eql('OK')
@@ -40,4 +42,35 @@ Então('esse funcionario sera cadastrado') do
   expect(@create_employee['data']['employee_name']).to eql('Tony')
   expect(@create_employee['data']['employee_salary']).to eql(420800)
   expect(@create_employee['data']['employee_age']).to eql(30)
+end
+
+
+Dado('que o usuario altere uma informacao de funcionario') do
+  @put_url = 'http://dummy.restapiexample.com/api/v1/update/27'
+end
+
+
+Quando('ele enviar as novas informacoes') do
+  headers = { "Content-Type" => "application/json" } 
+
+  @update_employee = HTTParty.put(@put_url, 
+    body: {
+      "employee_name": "Tony Stark",
+      "employee_salary": 500000,
+      "employee_age": 40
+    }.to_json,
+    headers: headers # ✅
+  )
+
+  puts @update_employee
+end
+
+Então('as informacoes serao alteradas') do
+  expect(@update_employee.code).to eq(200)
+  expect(@update_employee.message).to eq('OK')
+  expect(@update_employee['status']).to eq('success')
+  expect(@update_employee['message']).to eq('Successfully! Record has been updated.')
+  expect(@update_employee['data']['employee_name']).to eq('Tony Stark')
+  expect(@update_employee['data']['employee_salary']).to eq(500000)
+  expect(@update_employee['data']['employee_age']).to eq(40)
 end

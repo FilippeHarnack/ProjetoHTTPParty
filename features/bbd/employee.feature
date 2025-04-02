@@ -15,3 +15,9 @@ Cenário: Cadastrar funcionario
     Quando ele enviar as informacoes do funcionario
     Então esse funcionario sera cadastrado
 
+@cenario_tres
+Cenário: Alterar informacoes cadastrais
+    Dado que o usuario altere uma informacao de funcionario
+    Quando ele enviar as novas informacoes
+    Então as informacoes serao alteradas
+
